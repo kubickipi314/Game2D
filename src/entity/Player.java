@@ -9,11 +9,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Player extends Entity{
+public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
-    public Player(GamePanel gp, KeyHandler keyH){
+    public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
 
@@ -21,13 +21,14 @@ public class Player extends Entity{
         getPlayerImage();
     }
 
-    public void setDefaultValues(){
+    public void setDefaultValues() {
         x = 100;
         y = 100;
         speed = 4;
         direction = "down";
     }
-    public void getPlayerImage(){
+
+    public void getPlayerImage() {
         try {
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/character_up_1.png")));
             up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/character_up_2.png")));
@@ -38,11 +39,12 @@ public class Player extends Entity{
             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/character_right_1.png")));
             right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/character_right_2.png")));
 
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void update(){
+
+    public void update() {
         if (keyH.upPressed) {
             direction = "up";
             y -= speed;
@@ -64,16 +66,16 @@ public class Player extends Entity{
             spriteCounter++;
         }
 
-        if (spriteCounter > 5){
+        if (spriteCounter > 5) {
             spriteCounter = 0;
             spriteNum = !spriteNum;
         }
     }
 
-    public void draw(Graphics2D g2){
+    public void draw(Graphics2D g2) {
         BufferedImage image = null;
 
-        switch(direction) {
+        switch (direction) {
             case "up":
                 if (spriteNum)
                     image = up1;
